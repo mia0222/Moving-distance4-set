@@ -76,17 +76,17 @@
                 // カロリー計算
                 var weight = parseFloat(document.getElementById("weightInput").value); // ユーザーの体重
                 var activityType = document.getElementById("activityTypeInput").value; // ユーザーが選択した活動の種類
-                var caloriesBurned = calculateCaloriesBurned(totalDistance, weight, activityType);
+                var caloriesBurned = calculateCaloriesBurned(weight, activityType);
                 caloriesElement.innerHTML = "消費カロリー: " + caloriesBurned.toFixed(2) + " kcal";
             }
 
             lastPosition = position;
         }
 
-        function calculateCaloriesBurned(distance, weight, activityType) {
+        function calculateCaloriesBurned(weight, activityType) {
             // カロリー計算のための定数（一般的な値、実際には調整が必要かもしれません）
-            const caloriesPerKilometer = 1.05; // カロリー消費率 (kcal*kg*km)
-            let caloriesBurned = caloriesPerKilometer * distance * (weight / 1000);
+            const caloriesPerKilometer = 1.05; // カロリー消費率 (kcal*km*kg)
+            let caloriesBurned = caloriesPerKilometer * (weight / 1000);
 
             // 活動の種類に応じた補正（例: ウォーキングの場合）
             if (activityType === "walking") {
@@ -94,6 +94,8 @@
             } else if (activityType === "running") {
                 caloriesBurned *= 2.0; // ランニングの場合の補正値
             }
+
+            caloriesBurned = caloriesBurned /timeElapsed * 3600;
 
             return caloriesBurned;
         }
