@@ -85,14 +85,14 @@
 
         function calculateCaloriesBurned(distance, weight, activityType) {
             // カロリー計算のための定数（一般的な値、実際には調整が必要かもしれません）
-           // const caloriesPerKilometer = 1.05; // カロリー消費率 (kcal*kg*km)
-            let caloriesBurned = distance * (weight / 1000);
+            const caloriesPerKilometer = 1.05; // カロリー消費率 (kcal*kg*km)
+            let caloriesBurned =  distance * (weight / 1000);
 
             // 活動の種類に応じた補正（例: ウォーキングの場合）
             if (activityType === "walking") {
-                caloriesBurned *= 1.5; // ウォーキングの場合の補正値
+                caloriesBurned *= 0.7//1.5; // ウォーキングの場合の補正値
             } else if (activityType === "running") {
-                caloriesBurned *= 2.0; // ランニングの場合の補正値
+                caloriesBurned *= 1.0//2.0; // ランニングの場合の補正値
             }
 
             return caloriesBurned;
